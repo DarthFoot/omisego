@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 
 var helper = require('./helper');
+var beautify = require('js-beautify').js_beautify,
+    fs = require('fs');
 /*function checkJsonValidity(json) {
 	try{
 		JSON.parse(json);
@@ -26,10 +28,11 @@ class App extends Component {
 			convertedOutput = 'Output here...';
 		}
 		else {
-			convertedOutput = helper.convert(value);
+			convertedOutput = beautify(helper.convert(value), { indent_size: 2 });
+			console.log(convertedOutput);
 		}
 		this.setState({OutputText: convertedOutput});
-		console.log(convertedOutput);
+		console.log();
 	}
 	
   render() {
@@ -58,7 +61,7 @@ class App extends Component {
 					Output
 				</div>
 				<div className="converterItemInner output" id="output">
-					{this.state.OutputText}
+					<pre>{this.state.OutputText}</pre>
 				</div>
 			</div>
 		</div>
